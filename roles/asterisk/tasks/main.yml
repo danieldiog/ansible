@@ -1,0 +1,6 @@
+---
+# tasks file for asterisk
+#pacotes base
+#configurações de rede e selinux
+#configurações de usuarios e grupos
+#criação de diretório compartilhado
