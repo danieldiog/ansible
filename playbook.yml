@@ -1,5 +1,5 @@
 ---
-- name: Testar inventory_hostname
+- name: Configuração de máquina rocky8 com asterisk
   hosts: all
   gather_facts: false
 
