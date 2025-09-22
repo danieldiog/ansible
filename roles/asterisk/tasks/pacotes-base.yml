@@ -10,9 +10,7 @@
     creates: /etc/yum.repos.d/CentOS-PowerTools.repo
 
 - name: Habilitar repositório copr irontec/sngrep
-  community.general.dnf_copr:
-    name: irontec/sngrep
-    state: enabled
+  ansible.builtin.command: dnf -y copr enable irontec/sngrep
 
 - name: Pacotes base
   ansible.builtin.dnf:
