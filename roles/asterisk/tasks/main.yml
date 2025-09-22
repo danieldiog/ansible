@@ -1,4 +1,8 @@
 ---
+- name: Mostrar inventory_hostname
+  debug:
+    msg: "Host atual: {{ inventory_hostname }}"
+
 # tasks file for asterisk
 #pacotes base
 #configurações de rede e selinux

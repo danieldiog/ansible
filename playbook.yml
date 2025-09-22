@@ -3,7 +3,5 @@
   hosts: all
   gather_facts: false
 
-  tasks:
-    - name: Mostrar inventory_hostname
-      debug:
-        msg: "Host atual: {{ inventory_hostname }}"
+  roles:
+    - asterisk
