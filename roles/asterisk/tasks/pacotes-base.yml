@@ -1,0 +1,21 @@
+---
+- name: Instalações de pacotes base
+  ansible.builtin.dnf:
+    name: "@Development Tools"
+    state: present
+
+- name: Habilitar repositório powertools (RHEL8 / CentOS Stream 8)
+  ansible.builtin.command: dnf config-manager --set-enabled powertools
+  args:
+    creates: /etc/yum.repos.d/CentOS-PowerTools.repo
+
+- name: Habilitar repositório copr irontec/sngrep
+  community.general.dnf_copr:
+    name: irontec/sngrep
+    state: enabled
+
+- name: Pacotes base
+  ansible.builtin.dnf:
+    name: "{{ base_pkgs }}"
+    state: present
+  tags: PacotesBase

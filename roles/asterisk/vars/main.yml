@@ -1,2 +1,25 @@
 ---
-# vars file for asterisk
+base_pkgs:
+  - gcc
+  - sngrep
+  - gcc-c++
+  - make
+  - wget
+  - tar
+  - autoconf
+  - automake
+  - libtool
+  - ncurses-devel
+  - libxml2-devel
+  - sqlite-devel
+  - openssl-devel
+  - git
+  - patch
+  - vim
+  - tcpdump
+  - iproute
+  - sudo
+  - httpd
+  - nano
+  - procps-ng
+  - htop
