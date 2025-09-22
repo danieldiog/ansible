@@ -15,6 +15,11 @@
 - name: Habilitar repositório copr irontec/sngrep
   ansible.builtin.command: dnf -y copr enable irontec/sngrep
 
+- name: Instalar repositório EPEL
+  ansible.builtin.dnf:
+    name: epel-release
+    state: present
+
 - name: Pacotes base
   ansible.builtin.dnf:
     name: "{{ base_pkgs }}"
