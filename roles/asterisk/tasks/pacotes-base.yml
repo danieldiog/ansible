@@ -1,4 +1,7 @@
 ---
+- name: Instalação pacote python3-dnf
+  ansible.builtin.command: dnf install -y python3-dnf
+
 - name: Instalações de pacotes base
   ansible.builtin.dnf:
     name: "@Development Tools"
