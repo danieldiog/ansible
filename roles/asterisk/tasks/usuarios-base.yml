@@ -17,6 +17,6 @@
   ansible.builtin.copy:
     src: asterisk-sudoers
     dest: /etc/sudoers.d/asterisk
-  owner: root
-  group: root
-  mode: '0644'
+    owner: root
+    group: root
+    mode: '0644'
