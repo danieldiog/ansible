@@ -1,5 +1,6 @@
 ---
 base_pkgs:
+  - epel-release
   - gcc
   - sngrep
   - gcc-c++
