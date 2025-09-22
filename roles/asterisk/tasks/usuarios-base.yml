@@ -5,10 +5,18 @@
     state: present
     gid: 5000
     
-- name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+- name: Adição do usuário asterisk
   ansible.builtin.user:
     name: asterisk
     comment: Usuário Asterisk 
     uid: 5000
     group: asterisk
     shell: /bin/bash
+
+- name: Policy para liberar usuário Asterisk com permissões root 
+  ansible.builtin.copy:
+    src: asterisk-sudoers
+    dest: /etc/sudoers.d/asterisk
+  owner: root
+  group: root
+  mode: '0644'
