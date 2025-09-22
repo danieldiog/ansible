@@ -1,6 +1,6 @@
 ---
 - name: Testar inventory_hostname
-  hosts: all
+  hosts: hosts
   gather_facts: false
 
   tasks:
