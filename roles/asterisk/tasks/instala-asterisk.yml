@@ -56,20 +56,12 @@
   ansible.builtin.copy:
     src: etc-asterisk-padrao.tar.gz
     dest: /tmp/etc-asterisk-padrao.tar.gz
-  
-- name: "Copiar arquivos e modulo base do asterisk"
-  ansible.builtin.copy:
-    src: var-config-asterisk20.tar.gz
-    dest: /tmp/var-config-asterisk20.tar.gz
 
 - name: "Instalar arquivos base do asterisk"
   ansible.builtin.shell: |
     rm -rf /etc/asterisk/* && \
-    etc-asterisk-padrao.tar.gz /etc/asterisk && \
-    tar -zxvf /etc/asterisk/etc-asterisk-padrao.tar.gz -C /etc/asterisk && rm -rf /etc/asterisk/etc-asterisk-padrao.tar.gz && \
-    rm -rf /tmp/var-config-asterisk20.tar.gz && rm -rf /tmp/etc-asterisk-padrao.tar.gz 
-  args:
-    chdir: /tmp
+    mv /tmp/etc-asterisk-padrao.tar.gz /etc/asterisk && \
+    tar -zxvf /etc/asterisk/etc-asterisk-padrao.tar.gz -C /etc/asterisk && rm -rf /etc/asterisk/etc-asterisk-padrao.tar.gz
 
 - name: "Ajustar permissão do asterisk"
   ansible.builtin.shell: |
