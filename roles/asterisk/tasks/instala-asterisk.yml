@@ -69,3 +69,9 @@
     /etc/asterisk \
     /var/{lib,log,spool,run,cache}/asterisk \
     /usr/lib64/asterisk
+
+- name: "Start asterisk"
+  ansible.builtin.service:
+    name: asterisk
+    state: started
+    enabled: yes
