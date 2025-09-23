@@ -12,15 +12,15 @@
 
 - name: "Baixar Asterisk via curl"
   ansible.builtin.shell: |
-    curl -L -o /usr/src/asterisk-20.11.0.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.11.0.tar.gz
+    curl -L https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.11.0.tar.gz
   args:
-    creates: /usr/src/asterisk-20.11.0.tar.gz
+    chdir: /usr/src
 
 - name: "Extrair Asterisk"
-  ansible.builtin.unarchive:
-    src: /usr/src/asterisk-20.11.0.tar.gz
-    dest: /usr/src/
-    remote_src: yes
+  ansible.builtin.shell: |
+    tar -zxvf asterisk-20.11.0.tar.gz
+  args:
+    chdir: /usr/src/
 
 - name: "Instalar e compilar Asterisk"
   ansible.builtin.shell: |
