@@ -35,7 +35,7 @@
     make config && \
     make install-logrotate
   args:
-    chdir: /usr/src/asterisk-20-current
+    chdir: /usr/src/asterisk-20.15.2
     creates: /usr/sbin/asterisk
 
 - name: "Copiar arquivos e modulo base do asterisk"
