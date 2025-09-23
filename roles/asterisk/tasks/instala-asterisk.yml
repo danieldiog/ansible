@@ -12,17 +12,17 @@
 
 - name: "Baixar Asterisk via curl"
   ansible.builtin.shell: |
-    curl -L -o asterisk-20.11.0.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.11.0.tar.gz
+    curl -L -o asterisk-20-current.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20-current.tar.gz
   args:
     chdir: /usr/src
-    creates: /usr/src/asterisk-20.11.0.tar.gz
+    creates: /usr/src/asterisk-20-current.tar.gz
 
 - name: "Extrair Asterisk"
   ansible.builtin.shell: |
-    tar -zxvf asterisk-20.11.0.tar.gz
+    tar -zxvf asterisk-20-current.tar.gz
   args:
     chdir: /usr/src
-    creates: /usr/src/asterisk-20.11.0
+    creates: /usr/src/asterisk-20-current
 
 - name: "Instalar e compilar Asterisk"
   ansible.builtin.shell: |
@@ -35,7 +35,7 @@
     make config && \
     make install-logrotate
   args:
-    chdir: /usr/src/asterisk-20.11.0
+    chdir: /usr/src/asterisk-20-current
     creates: /usr/sbin/asterisk
 
 - name: "Copiar arquivos e modulo base do asterisk"
