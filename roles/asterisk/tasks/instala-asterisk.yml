@@ -1,0 +1,65 @@
+---
+- name: "Instalar e compilar Jansson"
+  ansible.builtin.shell: |
+    git clone https://github.com/akheron/jansson.git && \
+    cd jansson && \
+    autoreconf -i && \
+    ./configure --prefix=/usr --libdir=/usr/lib64 && \
+    make && \
+    make install
+  args:
+    creates: /usr/lib64/libjansson.so
+
+- name: "Baixar Asterisk"
+  ansible.builtin.get_url:
+    url: https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.11.0.tar.gz
+    dest: /usr/src/asterisk-20.11.0.tar.gz
+    mode: '0644'
+
+- name: "Extrair Asterisk"
+  ansible.builtin.unarchive:
+    src: /usr/src/asterisk-20.11.0.tar.gz
+    dest: /usr/src/
+    remote_src: yes
+
+- name: "Instalar e compilar Asterisk"
+  ansible.builtin.shell: |
+    ./contrib/scripts/install_prereq install && \
+    ./configure --libdir=/usr/lib64 --with-jansson-bundled && \
+    ./contrib/scripts/get_mp3_source.sh && \
+    make && \
+    make install && \
+    make samples && \
+    make config && \
+    make install-logrotate
+  args:
+    chdir: /usr/src/asterisk-20.11.0
+    creates: /usr/sbin/asterisk
+
+- name: "Copiar arquivos e modulo base do asterisk"
+  ansible.builtin.copy:
+    src: odbc.ini
+    dest: /etc/odbc.ini
+    owner: root
+    group: root
+
+- name: "Copiar arquivos e modulo base do asterisk"
+  ansible.builtin.copy:
+    src: psqlodbcw.so
+    dest: /usr/lib64
+    owner: root
+    group: root
+    mode: '0554'
+
+- name: "Instalar arquivos base do asterisk"
+  ansible.builtin.shell: |
+    rm -rf /etc/asterisk/* && \
+    etc-asterisk-padrao.tar.gz /etc/asterisk && \
+    tar zxvf /etc/asterisk/etc-asterisk-padrao.tar.gz -C /etc/asterisk && rm /etc/asterisk/etc-asterisk-padrao.tar.gz
+
+- name: "Ajustar permissão do asterisk"
+  ansible.builtin.shell: |
+    chown -R asterisk:asterisk \
+    /etc/asterisk \
+    /var/{lib,log,spool,run,cache}/asterisk \
+    /usr/lib64/asterisk
