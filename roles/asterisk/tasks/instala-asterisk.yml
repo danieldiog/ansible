@@ -28,7 +28,6 @@
   ansible.builtin.shell: |
     ./contrib/scripts/install_prereq install && \
     ./configure --libdir=/usr/lib64 --with-jansson-bundled && \
-    ./contrib/scripts/get_mp3_source.sh && \
     make && \
     make install && \
     make samples && \
