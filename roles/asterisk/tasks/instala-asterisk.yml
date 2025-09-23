@@ -12,7 +12,7 @@
 
 - name: "Baixar Asterisk via curl"
   ansible.builtin.shell: |
-    curl -L -o asterisk-20-current.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.15.2.tar.gz
+    curl -L -o asterisk-20.15.2.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.15.2.tar.gz
   args:
     chdir: /usr/src
     creates: /usr/src/asterisk-20.15.2.tar.gz
