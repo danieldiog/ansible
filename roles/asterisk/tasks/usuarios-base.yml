@@ -1,5 +1,5 @@
 ---
-- name: Ensure group "docker" exists with correct gid
+- name: Criação grupo asterisk
   ansible.builtin.group:
     name: asterisk
     state: present

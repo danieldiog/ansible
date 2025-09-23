@@ -15,6 +15,7 @@
     url: https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.11.0.tar.gz
     dest: /usr/src/asterisk-20.11.0.tar.gz
     mode: '0644'
+    follow_redirects: yes
 
 - name: "Extrair Asterisk"
   ansible.builtin.unarchive:
