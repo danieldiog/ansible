@@ -10,12 +10,11 @@
   args:
     creates: /usr/lib64/libjansson.so
 
-- name: "Baixar Asterisk"
-  ansible.builtin.get_url:
-    url: https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.11.0.tar.gz
-    dest: /usr/src/asterisk-20.11.0.tar.gz
-    mode: '0644'
-    follow_redirects: yes
+- name: "Baixar Asterisk via curl"
+  ansible.builtin.shell: |
+    curl -L -o /usr/src/asterisk-20.11.0.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20.11.0.tar.gz
+  args:
+    creates: /usr/src/asterisk-20.11.0.tar.gz
 
 - name: "Extrair Asterisk"
   ansible.builtin.unarchive:
