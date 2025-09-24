@@ -1,2 +1,7 @@
 ---
 # handlers file for asterisk
+- name: StartAsterisk
+  ansible.builtin.service:
+    name: asterisk
+    state: started
+    enabled: yes
