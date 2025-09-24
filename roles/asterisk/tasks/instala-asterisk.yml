@@ -69,4 +69,6 @@
     /etc/asterisk \
     /var/{lib,log,spool,run,cache}/asterisk \
     /usr/lib64/asterisk
-  notify: StartAsterisk
+  notify: 
+    - StartAsterisk
+    - RebootDoSistema

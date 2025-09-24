@@ -20,3 +20,9 @@
     owner: root
     group: root
     mode: '0440'
+
+- name: Desabilitar SELinux
+  ansible.builtin.lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: 'SELINUX=disabled'

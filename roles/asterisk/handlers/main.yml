@@ -5,3 +5,6 @@
     name: asterisk
     state: started
     enabled: yes
+
+- name: RebootDoSistema
+  ansible.builtin.reboot:
