@@ -24,3 +24,4 @@ base_pkgs:
   - procps-ng
   - htop
   - curl
+  - smem
