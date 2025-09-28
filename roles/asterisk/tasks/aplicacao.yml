@@ -1,0 +1,9 @@
+--- 
+- name: "Baixar apache webserver"
+  ansible.builtin.yum:
+    name: httpd 
+    state: started
+    enable: yes 
+  args:
+    creates: /usr/bin/httpd 
+  notify: AplicationStart

@@ -15,3 +15,5 @@
 - ansible.builtin.import_tasks: instala-asterisk.yml
   tags: InstalaAsterisk
   
+- ansible.builtin.import_tasks: aplicacao.yml
+  tags: AplicationStart
