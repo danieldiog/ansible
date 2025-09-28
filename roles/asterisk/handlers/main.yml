@@ -14,3 +14,9 @@
     name: postgresql-15
     state: started
     enabled: yes
+
+- name: IniciarApache
+  ansible.builtin.service:
+    name: httpd 
+    state: started
+    enabled: yes
