@@ -8,3 +8,9 @@
 
 - name: RebootDoSistema
   ansible.builtin.reboot:
+
+- name: StartPostgresql
+  ansible.builtin.service:
+    name: postgresql-15
+    state: started
+    enabled: yes

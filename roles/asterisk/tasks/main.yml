@@ -9,6 +9,9 @@
 - ansible.builtin.import_tasks: usuarios-base.yml
   tags: UsuariosBase
 
+- ansible.builtin.import_tasks: instala-postgresql.yml
+  tags: InstalaPostgresql15
+
 - ansible.builtin.import_tasks: instala-asterisk.yml
   tags: InstalaAsterisk
   

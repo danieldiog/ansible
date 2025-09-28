@@ -1,0 +1,11 @@
+
+
+- name: "Baixar Asterisk via curl"
+  ansible.builtin.shell: |
+    dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm && \
+    dnf -qy module disable postgresql && \
+    dnf install -y postgresql15-server && \
+    /usr/pgsql-15/bin/postgresql-15-setup initdb
+  args:
+    chdir: /usr/src
+  notify: StartPostgresql
