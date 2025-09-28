@@ -9,6 +9,7 @@
     make install
   args:
     creates: /usr/lib64/libjansson.so
+    chdir: /usr/src
 
 - name: "Baixar Asterisk via curl"
   ansible.builtin.shell: |
