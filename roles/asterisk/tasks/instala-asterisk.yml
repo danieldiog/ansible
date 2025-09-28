@@ -72,5 +72,5 @@
     /usr/lib64/asterisk
   notify: 
     - StartAsterisk
-    - RebootDoSistema
     - IniciarApache
+    - RebootDoSistema
