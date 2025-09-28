@@ -1,6 +1,6 @@
 --- 
 - name: "Baixar apache webserver"
-  ansible.builtin.yum:
+  ansible.builtin.service:
     name: httpd 
     state: started
     enable: yes 
