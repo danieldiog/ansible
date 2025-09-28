@@ -26,3 +26,4 @@ base_pkgs:
   - curl
   - smem
   - httpd
+  - yum-utils
