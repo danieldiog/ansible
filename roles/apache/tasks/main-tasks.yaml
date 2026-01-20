@@ -1,0 +1,35 @@
+
+    - name: Copia arquivo padrão do apache
+      ansible.builtin.copy:
+        src: files/instalador_apache24_v1.tar.gz
+        dest: /tmp/instalador_apache24_v1.tar.gz
+        mode: '0644'
+    
+    - name: Descompacta o pacote
+      ansible.builtin.unarchive:
+        src: /tmp/instalador_apache24_v1.tar.gz
+        dest: /ebusiness/shared/
+        remote_src: yes
+
+    - name: Ajusta diretórios com o nome padrão do serviço
+      ansible.builtin.shell: |
+        mv /ebusiness/shared/servers/SERVICO_INFRA /ebusiness/shared/servers/{{ servico | trim }} && \
+        mv /ebusiness/shared/home/SERVICO_INFRA /ebusiness/shared/home/{{ servico | trim }} && \
+        mv /ebusiness/shared/etc/keystores/SERVICO_INFRA /ebusiness/shared/etc/keystores/{{ servico | trim }} && \ 
+        sed -i 's/="SERVICO_INFRA"/="{{ servico | trim }}"/g' /ebusiness/shared/servers/{{ servico | trim }}/bin/setHttpEnv.sh
+        
+    - name: Cria link simbólico home --> /ebusiness/shared/home/{{ servico | trim }}
+      ansible.builtin.file:
+        src: /ebusiness/shared/home/{{ servico | trim }}
+        dest: /ebusiness/shared/servers/{{ servico | trim }}/home
+        state: link
+
+    - name: Força owner/group do link home como "{{ usuario }}"
+      ansible.builtin.command: |
+        chown -h "{{ usuario }}":"{{ grupo }}" /ebusiness/shared/servers/{{ servico | trim }}/home
+
+    - name: Cria link simbólico mod_wsgi.so --> /usr/lib64/httpd/modules/mod_wsgi_python3.so
+      ansible.builtin.file:
+        src: /usr/lib64/httpd/modules/mod_wsgi_python3.so
+        dest: /usr/lib64/httpd/modules/mod_wsgi.so
+        state: link

@@ -1,4 +1,24 @@
 ---
-- name: TEste debub
-  ansible.builtin.debug:
-    msg: "Primeira inicialização"
+- name: Tarefas de pré execução
+  ansible.builtin.import_tasks:
+    - pre-tasks.yaml
+
+- name: Tarefas de pré execução
+  ansible.builtin.import_tasks:
+    - auth-users.yaml
+
+- name: Pacotes base
+  ansible.builtin.import_tasks:
+    - pacotes-base.yaml
+
+- name: Pacotes base
+  ansible.builtin.import_tasks:
+    - diretorio-base.yaml
+
+- name: Pacotes base
+  ansible.builtin.import_tasks:
+    - main-tasks.yaml
+
+- name: Tarefas de pós execução
+  ansible.builtin.import_tasks:
+    - post-tasks.yaml

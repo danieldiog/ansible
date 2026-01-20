@@ -1,0 +1,13 @@
+---
+    - name: Verifica se a configuração está correta
+      ansible.builtin.command: bash /ebusiness/shared/servers/{{ servico | trim}}/bin/checkHttpConfig.sh
+      register: check_http_config
+      failed_when: "'Syntax OK' not in check_http_config.stderr"
+      changed_when: false
+      become: true
+      become_user: "{{ usuario }}"
+
+    - name: Inicia o Apache
+      ansible.builtin.command: bash /ebusiness/shared/servers/{{ servico | trim }}/start 1
+      changed_when: false
+      become: true

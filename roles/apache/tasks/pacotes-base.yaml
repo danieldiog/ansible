@@ -1,0 +1,5 @@
+
+    - name: Garante instalação do Apache e módulos
+      ansible.builtin.yum:
+        name: "{{ pacotes_base }}"
+        state: present

@@ -1,0 +1,23 @@
+---    
+    - name: Avalia se o servico já existe
+      ansible.builtin.stat:
+        path: "/ebusiness/shared/servers/{{ servico | trim }}"
+      register: servico_check 
+
+    - name: Não executa o playbook caso o já tenha um serviço configurado.
+      ansible.builtin.assert:
+        that:
+          - not servico_check.stat.exists
+        fail_msg: >
+          Execução abortada, {{ servico | trim }} já existe.
+        success_msg: >
+           Serviço não existe, execução pode continuar.
+      
+    - name: Limita execução a um host por vez.
+      ansible.builtin.assert:
+        that:
+          - servidor_alvo is string or (servidor_alvo | length == 1)
+        fail_msg: >
+          Execução abortada, execute um servidor alvo por vez.
+        success_msg: >
+          Foi definido apenas um alvo, execução pode continuar

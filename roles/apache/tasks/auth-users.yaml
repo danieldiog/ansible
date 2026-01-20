@@ -1,0 +1,17 @@
+---    
+    - name: Cria grupo local
+      ansible.builtin.group:
+        name: "{{ grupo }}"
+        gid: "{{ gid }}"
+        local: yes
+        state: present
+
+    - name: Cria usuário local
+      ansible.builtin.user:
+        name: "{{ usuario }}"
+        group: "{{ grupo }}"
+        uid: "{{ uid }}"
+        groups: "{{ grupo }}"
+        local: yes
+        create_home: no
+        state: present

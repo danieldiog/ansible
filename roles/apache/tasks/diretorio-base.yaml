@@ -1,0 +1,9 @@
+---    
+    - name: Cria diretórios padrão
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ usuario }}"
+        group: "{{ grupo }}"
+        mode: 0755
+      loop: "{{ diretorios }}"
