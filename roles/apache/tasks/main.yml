@@ -1,24 +1,18 @@
 ---
-- name: Tarefas de pré execução
-  ansible.builtin.import_tasks:
-    - pre-tasks.yaml
+- name: tarefas pre execução
+  ansible.builtin.import_tasks: pre-tasks.yaml
 
 - name: Tarefas de pré execução
-  ansible.builtin.import_tasks:
-    - auth-users.yaml
+  ansible.builtin.import_tasks: auth-users.yaml
 
 - name: Pacotes base
-  ansible.builtin.import_tasks:
-    - pacotes-base.yaml
+  ansible.builtin.import_tasks: pacotes-base.yaml
 
 - name: Pacotes base
-  ansible.builtin.import_tasks:
-    - diretorio-base.yaml
+  ansible.builtin.import_tasks: diretorio-base.yaml
 
 - name: Pacotes base
-  ansible.builtin.import_tasks:
-    - main-tasks.yaml
+  ansible.builtin.import_tasks: main-tasks.yaml
 
 - name: Tarefas de pós execução
-  ansible.builtin.import_tasks:
-    - post-tasks.yaml
+  ansible.builtin.import_tasks: post-tasks.yaml
