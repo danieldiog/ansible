@@ -1,3 +1,4 @@
 ---
-# tasks file for apache
-# tasks file for apache
+- name: TEste debub
+  ansible.builtin.debug:
+    msg: "Primeira inicialização"
