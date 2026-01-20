@@ -1,0 +1,37 @@
+#!/bin/bash
+
+## CONFIGURA VARIAVEIS DE AMBIENTE
+scriptDir=dirname "$0"
+. ${scriptDir}/bin/setHttpEnv.sh
+
+ARQ_LOG="${HTTP_SERVER_ROOT}/home/apache/serverlogs/start.out"
+
+
+## MENU DE OPCOES
+. ${scriptDir}/bin/menu.sh
+
+
+## EXECUCAO DO APACHE
+
+HTTP_ARGUMENTS="$HTTP_ARGUMENTS $ARGS"
+
+# Checar se a instancia esta no ar:
+ CHECK_RUNNING=/bin/ps -ef | grep httpd | grep ${HTTP_SERVICO_INFRA} | grep -v grep
+ if [[ -n $CHECK_RUNNING ]] ; then
+   echo
+   echo "A instancia do Apache ${HTTP_SERVICO_INFRA} ainda esta em execucao..."
+   echo
+   exit 0
+ fi
+
+DATA=/bin/date +%D" - "%T
+echo "###  Apache Iniciado em: $DATA  ###" | tee $ARQ_LOG
+echo "====================================
+
+Apache Iniciado no Modo ${MODO}
+
+====================================" | tee -a $ARQ_LOG
+
+cd ${HTTP_SERVER_ROOT}
+${CMD_HTTPD} -d ${HTTP_SERVER_ROOT} ${HTTP_ARGUMENTS}
+###########################################

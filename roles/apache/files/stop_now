@@ -1,0 +1,11 @@
+#!/bin/bash
+
+scriptDir=dirname "$0"
+
+#Configura variaveis de ambiente
+. ${scriptDir}/bin/setHttpEnv.sh
+
+
+# STOP GRACEFUL - SIGNAL: WINCH
+ps --ppid cat ${HTTP_PID_FILE} -o pid h > ${HTTP_CHECKRESTART_PID_FILE}
+kill -WINCH cat ${HTTP_PID_FILE}

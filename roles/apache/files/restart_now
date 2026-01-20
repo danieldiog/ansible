@@ -1,0 +1,23 @@
+#!/bin/bash
+
+scriptDir=dirname "$0"
+
+#Configura variaveis de ambiente
+. ${scriptDir}/bin/setHttpEnv.sh
+
+
+# RESTART GRACEFUL - SIGNAL: USR1
+ps --ppid cat ${HTTP_PID_FILE} -o pid h > ${HTTP_CHECKRESTART_PID_FILE}
+kill -USR1 cat ${HTTP_PID_FILE}
+[root@npab3196 MtnIntSzA]# cat restart_now
+#!/bin/bash
+
+scriptDir=dirname "$0"
+
+#Configura variaveis de ambiente
+. ${scriptDir}/bin/setHttpEnv.sh
+
+
+# RESTART NOW - SIGNAL: HUP
+ps --ppid cat ${HTTP_PID_FILE} -o pid h > ${HTTP_CHECKRESTART_PID_FILE}
+kill -HUP cat ${HTTP_PID_FILE}

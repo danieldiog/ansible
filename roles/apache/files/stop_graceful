@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if [ "$(id -u)" != "0" ]
+then
+        echo "ERRO: Este comando precisa ser executado como root."
+        exit 1
+fi
+
+
+scriptDir=dirname "$0"
+
+#Configura variaveis de ambiente
+. ${scriptDir}/bin/setHttpEnv.sh
+
+APACHE_PID=$(cat ${HTTP_PID_FILE} 2> /dev/null)
+
+if [ "$?" != "0" ]
+then
+        echo "ERRO: PID do Apache não pode ser localizado. Erro de configuração ou Apache não está em execução."
+        exit 1
+fi
+
+# STOP NOW - SIGNAL: TERM
+ps --ppid ${APACHE_PID} -o pid h > ${HTTP_CHECKRESTART_PID_FILE}
+kill -TERM ${APACHE_PID}
+
+
+echo -n "Solicitação enviada. Aguardando finalização do Apache..."
+while true
+do
+        APACHE_PID=$(cat ${HTTP_PID_FILE} 2> /dev/null)
+        if [ "$?" !=  "0" ]
+        then
+                break
+        else
+                echo -n '.'
+                sleep 1
+        fi
+done
+echo "OK"
