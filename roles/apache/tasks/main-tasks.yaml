@@ -63,3 +63,37 @@
     - start
     - stop_graceful
     - stop_now
+  
+- name: Transferir arquivos para diretório de configuração
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /web/shared/servers/{{ servico | trim }}/conf
+    owner: "{{ usuario }}"
+    group: "{{ grupo }}"
+    mode: "0664"
+  loop:
+    - httpd.conf
+
+- name: Transferir arquivos para diretório de configuração
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /web/shared/servers/{{ servico | trim }}/conf/applications.d
+    owner: "{{ usuario }}"
+    group: "{{ grupo }}"
+    mode: "0664"
+  loop:
+    - welcome.cfg
+
+- name: Transferir arquivos para diretório de configuração
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /web/shared/servers/{{ servico | trim }}/conf/modules.d
+    owner: "{{ usuario }}"
+    group: "{{ grupo }}"
+    mode: "0664"
+  loop:
+    - 00-base.conf
+    - 00-dav.conf
+    - 00-ssl.conf
+    - 00-systemd.conf
+    - 01-proxy.conf
