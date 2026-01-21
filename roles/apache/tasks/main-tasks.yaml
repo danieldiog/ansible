@@ -37,3 +37,23 @@
     - /web/shared/servers/{{ servico | trim }}/pids
     - /web/shared/servers/{{ servico | trim }}/home
   changed_when: false
+
+- name: Transferir arquivos bin para diretório
+  ansible.builtin.copy:
+    src: {{ item }}
+    dest: /web/shared/servers/{{ servico | trim }}/bin
+  loop:
+    - checkHttpConfig.sh
+    - menu.sh
+    - setHttpEnv.sh
+
+- name: Transferir arquivos para diretório de serviço
+  ansible.builtin.copy:
+    src: {{ item }}
+    dest: /web/shared/servers/{{ servico | trim }}
+  loop:
+    - restart_graceful
+    - restart_now
+    - start
+    - stop_graceful
+    - stop_now
