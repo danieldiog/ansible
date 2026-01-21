@@ -30,7 +30,7 @@
     state: link
 
 - name: Força owner/group do link home como {{ usuario }}
-  ansible.builtin.command: chmod -h {{ usuario }}:{{ grupo }} {{ item }}
+  ansible.builtin.command: chown -h {{ usuario }}:{{ grupo }} {{ item }}
   loop:
     - /web/shared/servers/{{ servico | trim }}/httpd
     - /web/shared/servers/{{ servico | trim }}/modules
