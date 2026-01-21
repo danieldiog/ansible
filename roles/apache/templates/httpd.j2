@@ -47,8 +47,8 @@ DocumentRoot "home/apache/docroot/"
 </Files>
 
 # Usuario que roda os processos do apache
-User "{{ usuario }}"
-Group "{{ grupo }}"
+User {{ usuario }}
+Group {{ grupo }}
 
 # Diretivas de Timeout
 Timeout 300

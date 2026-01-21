@@ -65,14 +65,14 @@
     - stop_now
   
 - name: Transferir arquivos para diretório de configuração
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: "{{ item }}"
-    dest: /web/shared/servers/{{ servico | trim }}/conf
+    dest: /web/shared/servers/{{ servico | trim }}/conf/httpd.conf
     owner: "{{ usuario }}"
     group: "{{ grupo }}"
     mode: "0664"
   loop:
-    - httpd.conf
+    - httpd.j2
 
 - name: Transferir arquivos para diretório de configuração
   ansible.builtin.copy:
