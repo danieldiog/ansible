@@ -4,7 +4,7 @@
 # Localizacao da instancia do apache
 #
 
-HTTP_SERVICO_INFRA="{{ servico | trim }"
+HTTP_SERVICO_INFRA="{{ servico | trim }}"
 HTTP_SERVER_ROOT="/web/shared/servers/${HTTP_SERVICO_INFRA}"
 HTTP_LISTEN_ADDRESS="*"
 export HTTP_SERVICO_INFRA HTTP_SERVER_ROOT HTTP_LISTEN_ADDRESS
